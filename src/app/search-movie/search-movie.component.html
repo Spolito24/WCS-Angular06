@@ -1,0 +1,39 @@
+<form [formGroup]="searchForm" (ngSubmit)="submit()">
+  <div formGroupName="infos">
+      <div>
+          <label> Identifiant : </label>
+          <input type="text" formControlName="id">
+      </div>
+      <div>
+          <label> Titre : </label>
+          <input type="text" formControlName="title">
+          <div *ngIf="searchForm.get('infos')?.hasError('isRequired')">
+            One of the two fields Identifier or Title must be filled in
+          </div>
+      </div>
+  </div>
+  <div>
+      <label> Type :</label>
+      <select formControlName="type">
+          <option value="film">Movie</option>
+          <option value="série">Série</option>
+          <option value="épisode">Episode</option>
+      </select>
+  </div>
+  <div>
+      <label> Year of release :</label>
+      <input type="number" formControlName="releaseYear">
+      <div *ngIf="searchForm.get('releaseYear')?.hasError('min')">
+          the year should be between {{minYear}} and {{maxYear}}
+      </div>
+  </div>
+  <div>
+      <label> Card :</label>
+      <select formControlName="sheet">
+          <option value="complète">full</option>
+          <option value="courte">short</option>
+      </select>
+  </div>
+
+  <button type="submit">search movie</button>
+</form>
